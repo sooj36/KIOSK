@@ -2,6 +2,7 @@ package com.example.kioskproject
 
 import com.example.kioskproject.abstract.Display
 import com.example.kioskproject.model.Product
+import com.example.kioskproject.util.GatherString
 
 class HappyMeal : Display {
     var title = "[HappyMeal MENU]"
@@ -22,7 +23,7 @@ class HappyMeal : Display {
         Product("오렌지주스", "3800", "비타민 C를 함유한 4년 연속 세계 판매 1위 100% 오렌지 주스."),
     )
     var happyMealList = listOf<Product>(
-       Product("불고기버거", "3800", "한국인의 입맛에 딱 맞는 불고기 소스에 잘 재운 패티와 고소한 마요네즈, 신선한 양상추의 맛있는 조합."),
+        Product("불고기버거", "3800", "한국인의 입맛에 딱 맞는 불고기 소스에 잘 재운 패티와 고소한 마요네즈, 신선한 양상추의 맛있는 조합."),
         Product(
             "햄버거",
             "3800",
@@ -38,23 +39,26 @@ class HappyMeal : Display {
             "3800",
             "새콤 달콤 딸기 퓨레와 코코넛 젤리를 한 입에 먹을 수 있는 부드러운 딸기 코코넛 푸딩 이전 메뉴다음 메뉴"
         ),
-        Product("후렌치후라이 Small", "3800", "통으로 썰어낸 감자를 맥도날드만의 노하우로 튀겨낸 남다른 맛과 바삭함! 맥도날드의 역사가 담긴 월드 클래스 후렌치 후라이"),
+        Product(
+            "후렌치후라이 Small",
+            "3800",
+            "통으로 썰어낸 감자를 맥도날드만의 노하우로 튀겨낸 남다른 맛과 바삭함! 맥도날드의 역사가 담긴 월드 클래스 후렌치 후라이"
+        ),
         Product("생수", "3800", "활력을 되찾아주는 깔끔한 미네랄 생수."),
         Product("오렌지주스", "3800", "비타민 C를 함유한 4년 연속 세계 판매 1위 100% 오렌지 주스."),
     )
 
-    // 제품목록 가져오기
-    fun getProductList(isMacMorning:Boolean): List<Product> = if(isMacMorning) macMorningList else happyMealList
     override fun displayTitle() {
         println(title)
     }
 
     override fun displayInfo() {
         super.displayInfo()
-        var data:List<Product> = happyMealList
-        for(i in 0 until data.size) {
-           println("${i+1}. ${data[i].name} | ${data[i].price}원 | ${data[i].info}")
+        var data: List<Product> = happyMealList
+        for (i in 0 until data.size) {
+            println("${i + 1}. ${data[i].name} | ${data[i].price}원 | ${data[i].info}")
         }
+        println(GatherString.backTxt)
     }
 }
 
