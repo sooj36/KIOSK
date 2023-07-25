@@ -2,6 +2,7 @@ package com.example.kioskproject
 
 import com.example.kioskproject.abstract.Display
 import com.example.kioskproject.model.Product
+import com.example.kioskproject.util.GatherString
 
 class DrinkAndMacCafe: Display {
     var title = "[DrinkAndMacCafe MENU]"
@@ -13,7 +14,7 @@ class DrinkAndMacCafe: Display {
         Product("바닐라 라떼", "3200", "바로 내린 100% 친환경 커피의 진한 맛과 향, 1A등급 우유, 그리고 천연 바닐라 향으로 달콤함까지!"),
         Product("아이스 바닐라 라떼", "3300", "바로 내린 100% 친환경 커피의 진한 맛과 향, 1A등급 우유, 그리고 천연 바닐라 향으로 달콤함까지!"),
         Product("카페라떼", "2500", "바로 내린 100% 친환경 커피가 신선한 우유를 만나 더 신선하고 부드럽게!"),
-        Product("디카페인 카페라떼", "2600", "바로 내린 100% 친환경 커피가 신선한 우유를 만나 더 신선하고 부드럽게!\n"),
+        Product("디카페인 카페라떼", "2600", "바로 내린 100% 친환경 커피가 신선한 우유를 만나 더 신선하고 부드럽게!"),
         Product("아이스 카페라떼", "2500", "바로 내린 100% 친환경 커피가 신선한 우유를 만나 더 신선하고 부드럽게!"),
         Product("디카페인 아이스 카페라떼", "2800", "바로 내린 100% 친환경 커피가 신선한 우유를 만나 더 신선하고 부드럽게!"),
         Product("아메리카노", "2700", "바로 내린 100% 친환경 커피로 더 신선하게! 더 풍부하게!"),
@@ -35,5 +36,6 @@ class DrinkAndMacCafe: Display {
         for(i in 0 until macCafeList.size) {
            println("${i+1}. ${macCafeList[i].name} | ${macCafeList[i].price}원 | ${macCafeList[i].info}")
         }
+        println(GatherString.backTxt)
     }
 }
