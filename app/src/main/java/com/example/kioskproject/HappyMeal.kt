@@ -45,10 +45,13 @@ class HappyMeal : Display {
 
     // 제품목록 가져오기
     fun getProductList(isMacMorning:Boolean): List<Product> = if(isMacMorning) macMorningList else happyMealList
+    override fun displayTitle() {
+        println(title)
+    }
 
     override fun displayInfo() {
+        super.displayInfo()
         var data:List<Product> = happyMealList
-        println(title)
         for(i in 0 until data.size) {
            println("${i+1}. ${data[i].name} | ${data[i].price}원 | ${data[i].info}")
         }
