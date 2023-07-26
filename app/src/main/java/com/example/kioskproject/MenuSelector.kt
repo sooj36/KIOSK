@@ -64,15 +64,17 @@ class MenuSelector : InputHandler {
             4 -> {
                 // HappySnack
                 happySnack.displayInfo()
-                inputHandler(happySnack.happySnack)
-
+                var res = inputHandlerInt(happySnack.happySnack)
+                var price : Int = happySnack.happySnack[(res)-1].price.toInt()
+                var payment = Payment(price)
+                payment.pay()
+                //inputHandler(happySnack.happySnack)
             }
 
             5 -> {
                 // Side&Dessert
                 sideAndDessert.displayInfo()
                 inputHandler(sideAndDessert.sideAndDessert)
-                
             }
 
             6 -> {
@@ -95,20 +97,22 @@ class MenuSelector : InputHandler {
         }
     }
 
-    override fun <T> inputHandler(list: List<T>) {
+    override fun <T> inputHandlerInt(list: List<T>) : Int {
         var scanner = Scanner(System.`in`)
         var res = scanner.nextInt()
         try {
             if (res < 0 || res > list.size) {
                 println(GatherString.exceptionNumber)
-                inputHandler<T>(list)
+                inputHandlerInt<T>(list)
             }
         } catch (e: Exception) {
             println(GatherString.exceptionError)
-            inputHandler<T>(list)
+            inputHandlerInt<T>(list)
         }
+        return res
+
         //TODO 장바구니 기능추가
         //TODO 장바구니에 추가했을경우 메뉴판 && ORDER MENU 등장 아닐경우 처음 메뉴판만 띄우기
     }
-    
+
 }

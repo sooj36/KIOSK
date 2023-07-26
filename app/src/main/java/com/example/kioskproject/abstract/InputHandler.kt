@@ -4,6 +4,7 @@ package com.example.kioskproject.abstract
 interface InputHandler {
     // return값이 없을경우
     fun <T>inputHandler(list:List<T>) {}
+    fun <T>inputHandlerInt(list:List<T>) : Int {return 0}
     // Int Tyle return시 사용
     fun intInputHandler() : Int {
         return 0
