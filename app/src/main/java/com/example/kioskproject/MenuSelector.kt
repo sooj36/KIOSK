@@ -7,12 +7,22 @@ import kotlin.system.exitProcess
 
 /// 메뉴 선택에 따른 분기처리 Handling
 class MenuSelector{
+    // MacMorining
+    var  MacMorning: MacMorning
+    // MacLunch
+    var MacLunch: MacLunch
+    //Burger
+    var Burger: Burger
     // HappyMeal
     var happyMeal: HappyMeal
     // McCafe
     var mcCafeAndDrink: DrinkAndMacCafe
 
+
     init {
+        MacMorning = MacMorning()
+        MacLunch = MacLunch()
+        Burger = Burger()
         happyMeal = HappyMeal()
         mcCafeAndDrink = DrinkAndMacCafe()
     }
@@ -22,17 +32,18 @@ class MenuSelector{
         when (select) {
             1 -> {
                 // Burger
-                println(GatherString.develop)
+                Burger.displayInfo()
             }
 
             2 -> {
                 // MacLunch
-                println(GatherString.develop)
+                MacLunch.displayInfo()
+//                MacLunchHandler()
             }
 
             3 -> {
                 // MacMorning
-                println(GatherString.develop)
+                MacMorning.displayInfo()
             }
 
             4 -> {
