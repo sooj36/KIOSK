@@ -1,6 +1,8 @@
 package com.example.kioskproject
 
 fun main(){
-    var program = KeyoskProgram()
-    program.run()
+    var recoInfo = RecommendInfo()
+    recoInfo.showRecommendation()
+    //var program = KeyoskProgram()
+    //program.run()
 }
