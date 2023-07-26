@@ -1,6 +1,7 @@
 package com.example.kioskproject
 
 import com.example.kioskproject.model.Product
+import com.example.kioskproject.util.GatherString
 import java.util.ArrayList
 import kotlin.random.Random // 랜덤 생성
 
@@ -10,13 +11,12 @@ class RecommendInfo {
 
     // 선택한 메뉴를 저장할 리스트 생성
     var choicedMenu = mutableListOf<Product>()
+    // 싱글톤을 사용하면 객체가 한개니까 다른 함수나 클래스에서 사용해도 파일의 무결성이 지켜지지 않을까..?
+    // companion object var choicedMenu = mutableListOf<Product>()
 
     fun showRecommendation() {
         var randomNumber = (0..DrinkAndMacCafe.macCafeList.size-1).random() //랜덤 메뉴를 선택하기 위해 Random 클래스 생성 / 맥카페 리스트 개수
         var randomThree = mutableListOf<Product>() // 3개 랜덤
-
-
-
 
         println("[추천 메뉴를 확인하세요 -> a or b]")
         println("a. 추천 메뉴 보기")
@@ -34,21 +34,33 @@ class RecommendInfo {
                 println("${randomMenu}. ${randomThree[i].name} | ${randomThree[i].price} | ${randomThree[i].info}")
 
             }
+            try {
+                var choicedNumber: Int = readLine()!!.toInt()
+                choicedMenu.add(DrinkAndMacCafe.macCafeList[choicedNumber])
 
-            var choicedNumber : Int = readLine()!!.toInt()
-            choicedMenu.add(DrinkAndMacCafe.macCafeList[choicedNumber])
-            // 잘 담겼나 확인코드(for 개발자)
-            //println("${choicedMenu.toString()}")
-            for(i in 0 .. choicedMenu.size) {
-                println("[장바구니에 담긴 상품]\n${i+1}. ${choicedMenu[i].name} | ${choicedMenu[i].price}원")
+                for (i in 0..choicedMenu.size) {
+                    println("[장바구니에 담긴 상품]\n${i + 1}. ${choicedMenu[i].name} | ${choicedMenu[i].price}원")
+                }
+            } catch(e: Exception){
+                println("")
             }
 
         }
+
         else if (userInput == "b") {
-            println("[선택한 메뉴]")
+            try {
+                println("[선택한 메뉴]")
+                for (i in 0..choicedMenu.size) {
+                    println("[장바구니에 담긴 상품]\n${i + 1}. ${choicedMenu[i].name} | ${choicedMenu[i].price}원")
+                }
+            } catch (e: Exception) {
+
+            }
         }
+
         else {
             println("잘못된 입력입니다. 다시 선택해주세요.")
         }
+
     }
 }

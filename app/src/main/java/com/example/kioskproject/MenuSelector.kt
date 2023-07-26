@@ -76,9 +76,13 @@ class MenuSelector : InputHandler {
                 // HappySnack
                 happySnack.displayInfo()
                 var res = inputHandlerInt(happySnack.happySnack)
-                var price : Int = happySnack.happySnack[(res)-1].price.toInt()
-                var payment = Payment(price)
-                payment.pay()
+
+                var recoInfo = RecommendInfo()
+                recoInfo.showRecommendation()
+
+                //var price : Int = happySnack.happySnack[(res)-1].price.toInt()
+                //var payment = Payment(price)
+                //payment.pay()
                 //inputHandler(happySnack.happySnack)
             }
 
