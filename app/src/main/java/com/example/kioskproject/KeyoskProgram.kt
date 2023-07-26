@@ -7,7 +7,7 @@ import java.util.Scanner
 
 // KEYOSK 메인 프로그램
 class KeyoskProgram : Display, InputHandler {
-    val title1 = "\"맥도날드 18조점에 오신것을 환영합니다\" \n 아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.\n\n"
+    val title1 = "\"맥도날드 18호점에 오신것을 환영합니다\" \n 아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.\n\n"
     val title2 = "[맥도날드 18호점 MENU]\n"
     val title3 =
         " 1. Burger\n 2. MacLunch\n 3. MacMorning\n 4. HappySnack\n 5. McCafe&Drink\n 6. HappyMeal\n 7. 프로그램 종료"

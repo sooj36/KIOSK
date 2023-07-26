@@ -10,6 +10,7 @@ class Payment {
 
     var random = Random()
     var customerNum :Int = random.nextInt(1000)
+    var cookingTime : Int = random.nextInt(30)
 
     fun pay(){
         println("결제 방식을 선택해주세요.\na. 현금 \nb. 신용카드")
@@ -36,7 +37,7 @@ class Payment {
                     job.join()
                 }
 
-                println("주문번호 ${customerNum}번 고객님 15분 후 음식이 완료될 예정입니다.")
+                println("주문번호 ${customerNum}번 고객님 ${cookingTime}분 후 음식이 완료될 예정입니다.")
             }
         }
 
