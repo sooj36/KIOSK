@@ -1,20 +1,26 @@
 package com.example.kioskproject
 
+import com.example.kioskproject.abstract.InputHandler
+import com.example.kioskproject.model.Product
 import com.example.kioskproject.util.GatherString
 import java.lang.Exception
 import java.util.Scanner
 import kotlin.system.exitProcess
 
 /// 메뉴 선택에 따른 분기처리 Handling
-class MenuSelector{
+class MenuSelector : InputHandler {
     // MacMorining
-    var  MacMorning: MacMorning
+    var MacMorning: MacMorning
+
     // MacLunch
     var MacLunch: MacLunch
+
     //Burger
     var Burger: Burger
+
     // HappyMeal
     var happyMeal: HappyMeal
+
     // McCafe
     var mcCafeAndDrink: DrinkAndMacCafe
 
@@ -33,17 +39,19 @@ class MenuSelector{
             1 -> {
                 // Burger
                 Burger.displayInfo()
+                inputHandler(Burger.burgerList)
             }
 
             2 -> {
                 // MacLunch
                 MacLunch.displayInfo()
-//                MacLunchHandler()
+                inputHandler(MacLunch.macLunchList)
             }
 
             3 -> {
                 // MacMorning
                 MacMorning.displayInfo()
+                inputHandler(MacMorning.MacMorniningList)
             }
 
             4 -> {
@@ -54,13 +62,13 @@ class MenuSelector{
             5 -> {
                 // McCafe&Drink
                 mcCafeAndDrink.displayInfo()
-                mcCafeDrinkHandler()
+                inputHandler(mcCafeAndDrink.macCafeList)
             }
 
             6 -> {
                 // HappyMeal
                 happyMeal.displayInfo()
-                happyMealHandler()
+                inputHandler(happyMeal.happyMealList)
             }
 
             7 -> {
@@ -70,36 +78,34 @@ class MenuSelector{
             }
         }
     }
-    // 맥카페 입력 핸들러
-    fun mcCafeDrinkHandler() {
+
+    override fun <T> inputHandler(list: List<T>) {
         var scanner = Scanner(System.`in`)
         var res = scanner.nextInt()
         try {
-            if (res < 0 || res > mcCafeAndDrink.macCafeList.size) {
+            if (res < 0 || res > list.size) {
                 println(GatherString.exceptionNumber)
-                mcCafeDrinkHandler()
+                inputHandler<T>(list)
             }
         } catch (e: Exception) {
             println(GatherString.exceptionError)
-            mcCafeDrinkHandler()
+            inputHandler<T>(list)
         }
         //TODO 장바구니 기능추가
         //TODO 장바구니에 추가했을경우 메뉴판 && ORDER MENU 등장 아닐경우 처음 메뉴판만 띄우기
     }
     // 해피밀 입력 핸들러
-   fun happyMealHandler() {
-        var scanner = Scanner(System.`in`)
-        var res = scanner.nextInt()
-        try {
-            if (res < 0 || res > happyMeal.happyMealList.size) {
-                println(GatherString.exceptionNumber)
-                happyMealHandler()
-            }
-        } catch (e: Exception) {
-            println(GatherString.exceptionError)
-            happyMealHandler()
-        }
-        //TODO 장바구니 기능추가
-        //TODO 장바구니에 추가했을경우 메뉴판 && ORDER MENU 등장 아닐경우 처음 메뉴판만 띄우기
-    }
+//   fun happyMealHandler() {
+//        var scanner = Scanner(System.`in`)
+//        var res = scanner.nextInt()
+//        try {
+//            if (res < 0 || res > happyMeal.happyMealList.size) {
+//                println(GatherString.exceptionNumber)
+//                happyMealHandler()
+//            }
+//        } catch (e: Exception) {
+//            println(GatherString.exceptionError)
+//            happyMealHandler()
+//        }
+//    }
 }
