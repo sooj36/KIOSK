@@ -9,7 +9,10 @@ import java.util.Random
 class Payment {
 
     var random = Random()
+    // 고객번호 랜덤 생성 변수(0 ~ 1000)
     var customerNum :Int = random.nextInt(1000)
+    // 조리시간 랜덤 생성 변수(0 ~ 30분)
+    var cookingTime : Int = random.nextInt(30)
 
     fun pay(){
         println("결제 방식을 선택해주세요.\na. 현금 \nb. 신용카드")
@@ -36,7 +39,7 @@ class Payment {
                     job.join()
                 }
 
-                println("주문번호 ${customerNum}번 고객님 15분 후 음식이 완료될 예정입니다.")
+                println("주문번호 ${customerNum}번 고객님 ${cookingTime}분 후 음식이 완료될 예정입니다.")
             }
         }
 

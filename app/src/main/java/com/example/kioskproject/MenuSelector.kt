@@ -24,6 +24,11 @@ class MenuSelector : InputHandler {
     // McCafe
     var mcCafeAndDrink: DrinkAndMacCafe
 
+    // HappySnack
+    var happySnack: HappySnack
+  
+    // SideAndDessert
+    var sideAndDessert: SideAndDessert
 
     init {
         MacMorning = MacMorning()
@@ -31,6 +36,8 @@ class MenuSelector : InputHandler {
         Burger = Burger()
         happyMeal = HappyMeal()
         mcCafeAndDrink = DrinkAndMacCafe()
+        happySnack = HappySnack()
+        sideAndDessert = SideAndDessert()
     }
 
     // 실제 프로그램 분기 Handler
@@ -56,22 +63,31 @@ class MenuSelector : InputHandler {
 
             4 -> {
                 // HappySnack
-                println(GatherString.develop)
+                happySnack.displayInfo()
+                inputHandler(happySnack.happySnack)
+
             }
 
             5 -> {
+                // Side&Dessert
+                sideAndDessert.displayInfo()
+                inputHandler(sideAndDessert.sideAndDessert)
+                
+            }
+
+            6 -> {
                 // McCafe&Drink
                 mcCafeAndDrink.displayInfo()
                 inputHandler(mcCafeAndDrink.macCafeList)
             }
 
-            6 -> {
+            7 -> {
                 // HappyMeal
                 happyMeal.displayInfo()
                 inputHandler(happyMeal.happyMealList)
             }
 
-            7 -> {
+            8 -> {
                 // Exit Program
                 println(GatherString.exitProgram)
                 exitProcess(0)
@@ -94,18 +110,5 @@ class MenuSelector : InputHandler {
         //TODO 장바구니 기능추가
         //TODO 장바구니에 추가했을경우 메뉴판 && ORDER MENU 등장 아닐경우 처음 메뉴판만 띄우기
     }
-    // 해피밀 입력 핸들러
-//   fun happyMealHandler() {
-//        var scanner = Scanner(System.`in`)
-//        var res = scanner.nextInt()
-//        try {
-//            if (res < 0 || res > happyMeal.happyMealList.size) {
-//                println(GatherString.exceptionNumber)
-//                happyMealHandler()
-//            }
-//        } catch (e: Exception) {
-//            println(GatherString.exceptionError)
-//            happyMealHandler()
-//        }
-//    }
+    
 }
