@@ -46,19 +46,30 @@ class MenuSelector : InputHandler {
             1 -> {
                 // Burger
                 Burger.displayInfo()
-                inputHandler(Burger.burgerList)
+                //inputHandler(Burger.burgerList)
+                var res = inputHandlerInt(Burger.burgerList)
+                var price : Int = Burger.burgerList[(res)-1].price.toInt()
+                var payment = Payment(price)
+                payment.pay()
             }
 
             2 -> {
                 // MacLunch
                 MacLunch.displayInfo()
-                inputHandler(MacLunch.macLunchList)
+                //inputHandler(MacLunch.macLunchList)
+                var res = inputHandlerInt(MacLunch.macLunchList)
+                var price : Int = MacLunch.macLunchList[(res)-1].price.toInt()
+                var payment = Payment(price)
+                payment.pay()
             }
 
             3 -> {
                 // MacMorning
                 MacMorning.displayInfo()
-                inputHandler(MacMorning.MacMorniningList)
+                var res = inputHandlerInt(MacMorning.MacMorniningList)
+                var price : Int = MacMorning.MacMorniningList[(res)-1].price.toInt()
+                var payment = Payment(price)
+                payment.pay()
             }
 
             4 -> {
@@ -74,19 +85,31 @@ class MenuSelector : InputHandler {
             5 -> {
                 // Side&Dessert
                 sideAndDessert.displayInfo()
-                inputHandler(sideAndDessert.sideAndDessert)
+                //inputHandler(sideAndDessert.sideAndDessert)
+                var res = inputHandlerInt(sideAndDessert.sideAndDessert)
+                var price : Int = sideAndDessert.sideAndDessert[(res)-1].price.toInt()
+                var payment = Payment(price)
+                payment.pay()
             }
 
             6 -> {
                 // McCafe&Drink
                 mcCafeAndDrink.displayInfo()
-                inputHandler(mcCafeAndDrink.macCafeList)
+                //inputHandler(mcCafeAndDrink.macCafeList)
+                var res = inputHandlerInt(mcCafeAndDrink.macCafeList)
+                var price : Int = mcCafeAndDrink.macCafeList[(res)-1].price.toInt()
+                var payment = Payment(price)
+                payment.pay()
             }
 
             7 -> {
                 // HappyMeal
                 happyMeal.displayInfo()
-                inputHandler(happyMeal.happyMealList)
+                //inputHandler(happyMeal.happyMealList)
+                var res = inputHandlerInt(happyMeal.happyMealList)
+                var price : Int = happyMeal.happyMealList[(res)-1].price.toInt()
+                var payment = Payment(price)
+                payment.pay()
             }
 
             8 -> {
@@ -96,7 +119,6 @@ class MenuSelector : InputHandler {
             }
         }
     }
-
     override fun <T> inputHandlerInt(list: List<T>) : Int {
         var scanner = Scanner(System.`in`)
         var res = scanner.nextInt()
@@ -114,5 +136,4 @@ class MenuSelector : InputHandler {
         //TODO 장바구니 기능추가
         //TODO 장바구니에 추가했을경우 메뉴판 && ORDER MENU 등장 아닐경우 처음 메뉴판만 띄우기
     }
-
 }
