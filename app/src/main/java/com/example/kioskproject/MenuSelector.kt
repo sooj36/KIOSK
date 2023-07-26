@@ -45,9 +45,6 @@ class MenuSelector{
                 happySnack.displayInfo()
                 happySnackHandler()
 
-                // 결제 클래스 테스트
-                //var paymentTest = Payment()
-                //paymentTest.pay()
             }
 
             5 -> {
