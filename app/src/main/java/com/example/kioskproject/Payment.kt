@@ -9,7 +9,9 @@ import java.util.Random
 class Payment {
 
     var random = Random()
+    // 고객번호 랜덤 생성 변수(0 ~ 1000)
     var customerNum :Int = random.nextInt(1000)
+    // 조리시간 랜덤 생성 변수(0 ~ 30분)
     var cookingTime : Int = random.nextInt(30)
 
     fun pay(){

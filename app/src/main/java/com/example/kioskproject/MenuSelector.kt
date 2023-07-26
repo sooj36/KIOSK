@@ -11,10 +11,15 @@ class MenuSelector{
     var happyMeal: HappyMeal
     // McCafe
     var mcCafeAndDrink: DrinkAndMacCafe
-
+    // HappySnack
+    var happySnack: HappySnack
+    // SideAndDessert
+    var sideAndDessert: SideAndDessert
     init {
         happyMeal = HappyMeal()
         mcCafeAndDrink = DrinkAndMacCafe()
+        happySnack = HappySnack()
+        sideAndDessert = SideAndDessert()
     }
 
     // 실제 프로그램 분기 Handler
@@ -37,7 +42,10 @@ class MenuSelector{
 
             4 -> {
                 // HappySnack
-                println(GatherString.develop)
+                happySnack.displayInfo()
+                happySnackHandler()
+//                var paymentTest = Payment()
+//                paymentTest.pay()
             }
 
             5 -> {
@@ -91,4 +99,37 @@ class MenuSelector{
         //TODO 장바구니 기능추가
         //TODO 장바구니에 추가했을경우 메뉴판 && ORDER MENU 등장 아닐경우 처음 메뉴판만 띄우기
     }
+    // 해피스낵 입력 핸들러
+    fun happySnackHandler() {
+        var scanner = Scanner(System.`in`)
+        var res = scanner.nextInt()
+        try {
+            if (res < 0 || res > happySnack.happySnack.size) {
+                println(GatherString.exceptionNumber)
+                happyMealHandler()
+            }
+        } catch (e: Exception) {
+            println(GatherString.exceptionError)
+            happyMealHandler()
+        }
+        //TODO 장바구니 기능추가
+        //TODO 장바구니에 추가했을경우 메뉴판 && ORDER MENU 등장 아닐경우 처음 메뉴판만 띄우기
+    }
+    // 사이드 앤 디저트 입력 핸들러
+    fun sideAndDessertHandler() {
+        var scanner = Scanner(System.`in`)
+        var res = scanner.nextInt()
+        try {
+            if (res < 0 || res > sideAndDessert.sideAndDessert.size) {
+                println(GatherString.exceptionNumber)
+                happyMealHandler()
+            }
+        } catch (e: Exception) {
+            println(GatherString.exceptionError)
+            happyMealHandler()
+        }
+        //TODO 장바구니 기능추가
+        //TODO 장바구니에 추가했을경우 메뉴판 && ORDER MENU 등장 아닐경우 처음 메뉴판만 띄우기
+    }
+
 }
