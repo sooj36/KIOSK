@@ -28,13 +28,6 @@ class HappySnack : Display{
         println(GatherString.backTxt)
     }
 
-    //    fun show(){
-//        println("===해피스낵===")
-//        for(index in 0 .. (happySnack.size) - 1){
-//            println("${index + 1 }. ${happySnack[index].name} : ${happySnack[index].price}원, ${happySnack[index].info}")
-//
-//        }
-//    }
 }
 
 

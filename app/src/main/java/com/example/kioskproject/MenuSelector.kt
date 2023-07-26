@@ -44,23 +44,32 @@ class MenuSelector{
                 // HappySnack
                 happySnack.displayInfo()
                 happySnackHandler()
-//                var paymentTest = Payment()
-//                paymentTest.pay()
+
+                // 결제 클래스 테스트
+                //var paymentTest = Payment()
+                //paymentTest.pay()
             }
 
             5 -> {
+                // Side&Dessert
+                sideAndDessert.displayInfo()
+                sideAndDessertHandler()
+            }
+
+
+            6 -> {
                 // McCafe&Drink
                 mcCafeAndDrink.displayInfo()
                 mcCafeDrinkHandler()
             }
 
-            6 -> {
+            7 -> {
                 // HappyMeal
                 happyMeal.displayInfo()
                 happyMealHandler()
             }
 
-            7 -> {
+            8 -> {
                 // Exit Program
                 println(GatherString.exitProgram)
                 exitProcess(0)
