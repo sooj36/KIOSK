@@ -1,6 +1,8 @@
 package com.example.kioskproject
 
+import com.example.kioskproject.abstract.Display
 import com.example.kioskproject.abstract.InputHandler
+import com.example.kioskproject.model.Product
 import com.example.kioskproject.util.GatherString
 import java.lang.Exception
 import java.util.Scanner
@@ -39,84 +41,59 @@ class MenuSelector : InputHandler {
         when (select) {
             1 -> {
                 // Burger
-                Burger.displayInfo()
-                res = inputHandlerInt(Burger.burgerList)
-
-                shoppingCart.saveChoiceMenu(Burger.burgerList, res)
-                shoppingCart.run(res, Burger.burgerList)
-                payment.pay(shoppingCart.choicedMenuList)
+                isEmptyShoppingCart<Burger>(Burger, Burger.burgerList)
             }
 
             2 -> {
                 // MacLunch
-                MacLunch.displayInfo()
-                res = inputHandlerInt(MacLunch.macLunchList)
-
-                shoppingCart.saveChoiceMenu(MacLunch.macLunchList, res)
-                shoppingCart.run(res, MacLunch.macLunchList)
-                payment.pay(shoppingCart.choicedMenuList)
+                isEmptyShoppingCart<MacLunch>(MacLunch, MacLunch.macLunchList)
             }
 
             3 -> {
                 // MacMorning
-                MacMorning.displayInfo()
-                res = inputHandlerInt(MacMorning.MacMorniningList)
-
-                shoppingCart.saveChoiceMenu(MacMorning.MacMorniningList, res)
-                shoppingCart.run(res, MacMorning.MacMorniningList)
-                payment.pay(shoppingCart.choicedMenuList)
-
+                isEmptyShoppingCart<MacMorning>(MacMorning, MacMorning.MacMorniningList)
             }
 
 
             4 -> {
                 // HappySnack
-                happySnack.displayInfo()
-                res = inputHandlerInt(happySnack.happySnack)
-
-                shoppingCart.saveChoiceMenu(happySnack.happySnack, res)
-                shoppingCart.run(res, happySnack.happySnack)
-                payment.pay(shoppingCart.choicedMenuList)
-
+                isEmptyShoppingCart<HappySnack>(happySnack, happySnack.happySnackList)
             }
 
             5 -> {
                 // Side&Dessert
-                sideAndDessert.displayInfo()
-                res = inputHandlerInt(sideAndDessert.sideAndDessert)
-
-                shoppingCart.saveChoiceMenu(sideAndDessert.sideAndDessert, res)
-                shoppingCart.run(res, sideAndDessert.sideAndDessert)
-                payment.pay(shoppingCart.choicedMenuList)
-
+                isEmptyShoppingCart<SideAndDessert>(
+                    sideAndDessert,
+                    sideAndDessert.sideAndDessertList
+                )
             }
 
             6 -> {
                 // McCafe&Drink
-                mcCafeAndDrink.displayInfo()
-                res = inputHandlerInt(mcCafeAndDrink.macCafeList)
-
-                shoppingCart.saveChoiceMenu(mcCafeAndDrink.macCafeList, res)
-                shoppingCart.run(res, mcCafeAndDrink.macCafeList)
-                payment.pay(shoppingCart.choicedMenuList)
+                isEmptyShoppingCart<DrinkAndMacCafe>(mcCafeAndDrink, mcCafeAndDrink.macCafeList)
 
             }
 
             7 -> {
                 // HappyMeal
-                happyMeal.displayInfo()
-                res = inputHandlerInt(happyMeal.happyMealList)
-
-                shoppingCart.saveChoiceMenu(happyMeal.happyMealList, res)
-                shoppingCart.run(res, happyMeal.happyMealList)
-                payment.pay(shoppingCart.choicedMenuList)
-
+                isEmptyShoppingCart<HappyMeal>(happyMeal, happyMeal.happyMealList)
             }
 
             8 -> {
                 // Exit Program
                 println(GatherString.exitProgram)
                 exitProcess(0)
+            }
+
+            9 -> {
+                shoppingCart.printConfirmOrder(payment)
+                shoppingCart.displayInfo()
+                shoppingCart.userInputHandler()
+                shoppingCart.finalOrderConfirm(payment)
+            }
+
+            10 -> {
+                shoppingCart.choicedMenuList.clear()
             }
         }
     }
@@ -134,10 +111,16 @@ class MenuSelector : InputHandler {
             inputHandlerInt<T>(list)
         }
         return res
-
-        //TODO 장바구니 기능추가
-        //TODO 장바구니에 추가했을경우 메뉴판 && ORDER MENU 등장 아닐경우 처음 메뉴판만 띄우기
     }
 
+    fun <T> isEmptyShoppingCart(instance: Display, list: List<Product>) {
+        instance.displayInfo()
+        res = inputHandlerInt(list)
+        if (res == 0) {
+            return
+        } else {
+            shoppingCart.savePopup(list, res)
+        }
+    }
 
 }

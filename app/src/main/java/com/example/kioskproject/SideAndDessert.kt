@@ -6,7 +6,7 @@ import com.example.kioskproject.util.GatherString
 
 class SideAndDessert : Display {
     var title = "[SideAndDessert MENU]"
-    var sideAndDessert = listOf<Product>(
+    var sideAndDessertList = listOf<Product>(
         Product("허니버터 인절미 맥쉐이커 후라이","2700","100% 국산 5곡의 고소함과 허니버터의 단짠 조합!" ),
         Product("케이준 비프 스낵랩","2400","매콤한 케이준 소스와 100% 순 쇠고기 패티의 만남"),
         Product("맥윙","3200", "겉은 바삭! 속은 쫄~깃한 치킨 윙!"),
@@ -36,8 +36,8 @@ class SideAndDessert : Display {
 
     override fun displayInfo() {
         super.displayInfo() // 물어보기
-        for(i in 0 until sideAndDessert.size){
-            println("${i+1}. ${sideAndDessert[i].name} | ${sideAndDessert[i].price}원 | ${sideAndDessert[i].info}")
+        for(i in 0 until sideAndDessertList.size){
+            println("${i+1}. ${sideAndDessertList[i].name} | ${sideAndDessertList[i].price}원 | ${sideAndDessertList[i].info}")
         }
         println(GatherString.backTxt)
     }

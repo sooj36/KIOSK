@@ -7,6 +7,7 @@ import java.util.Scanner
 
 // KEYOSK 메인 프로그램
 class KeyoskProgram : Display, InputHandler {
+
     val title1 = "\"맥도날드 18호점에 오신것을 환영합니다\" \n 아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.\n\n"
     val title2 = "[맥도날드 18호점 MENU]\n"
     val title3 =
@@ -14,22 +15,22 @@ class KeyoskProgram : Display, InputHandler {
     var selectMenu: Int = -1
 
     // 메뉴동작을 관리하는 클레스
-    var menuSelector: MenuSelector
-
-    init{
-        menuSelector = MenuSelector()
-    }
+    var menuSelector: MenuSelector = MenuSelector()
 
     fun run() {
         while (true) {
             displayInfo()
+            if(menuSelector.shoppingCart.choicedMenuList.isNotEmpty()) {
+                menuSelector.shoppingCart.printOrderMenu()
+            }
             selectMenu = intInputHandler()
             menuSelector.handler(selectMenu)
+
         }
     }
 
     override fun displayTitle() {
-        println("$title1$title2$title3 ")
+        println("$title1$title2$title3")
     }
 
     // title1, 2, 3 출력
@@ -41,8 +42,9 @@ class KeyoskProgram : Display, InputHandler {
     override fun intInputHandler(): Int {
         var scanner = Scanner(System.`in`)
         var input = scanner.nextInt()
+        var length = if(menuSelector.shoppingCart.choicedMenuList.isNotEmpty()) 10 else 8
         try {
-            if (input < 1 || input > 8 ) {
+            if (input < 1 || input > length ) {
             println(GatherString.exceptionNumber)
             intInputHandler()
         }
