@@ -1,24 +1,23 @@
 package com.example.kioskproject
 
 import com.example.kioskproject.model.Product
-import com.example.kioskproject.util.GatherString
-import java.util.ArrayList
-import kotlin.random.Random // 랜덤 생성
 import com.example.kioskproject.abstract.Display
 
-class RecommendInfo() : Display {
+class ShoppingCart : Display {
     var DrinkAndMacCafe = DrinkAndMacCafe()
-    lateinit var listData : List<Product>
+    lateinit var listData: List<Product>
 
     // 선택한 메뉴를 저장할 리스트 생성
     var choicedMenuList = mutableListOf<Product>()
 
-    fun showRecommendation(selectedNum: Int, list: List<Product>): MutableList<Product> {
-
+    fun run(selectedNum: Int, list: List<Product>) {
+        // 배열 DeepCopy
+        initListData(list)
+        // Display Menu
+        displayInfo()
         val userInput = readLine()!!.toString()
-
-
-        return choicedMenuList
+        // Handler 분기처리
+        userInputHandler(userInput)
     }
 
     fun getRandomNumber(): MutableSet<Int> {
@@ -34,31 +33,16 @@ class RecommendInfo() : Display {
         // 1. 추천메뉴
         when (input) {
             "a" -> {
-               printRecommandMenu()
-
-                // 추천메뉴를 보고 사용자로부터 값 입력 받음
+                printRecommandMenu()
                 var choicedNumber: Int = readLine()!!.toInt()
-
-                // 메뉴화면에서 선택한 메뉴 choicedMenuList에 추가
-                choicedMenuList.add(list[(selectedNum) - 1])
-                // 추천메뉴에서 선택한 메뉴 choicedMenuList에 추가
-                choicedMenuList.add(DrinkAndMacCafe.macCafeList[choicedNumber])
-
+                saveChoiceMenu(DrinkAndMacCafe.macCafeList, choicedNumber)
                 // choicedMenuList에 담긴 값 출력 후 리스트 반환
-                println("[장바구니에 담긴 상품]")
-                for (i in 0 until choicedMenuList.size) {
-                    println("${i + 1}. ${choicedMenuList[i].name} | ${choicedMenuList[i].price}원")
-                }
+                printShoppingCartList()
             }
 
             "b" -> {
                 println("[선택한 메뉴]")
-                // 메뉴화면에서 선택한 메뉴 choicedMenuList에 추가
-                choicedMenuList.add(list[(selectedNum) - 1])
-                // choicedMenuList에 담긴 값 출력 후 리스트 반환
-                for (i in 0 until choicedMenuList.size) {
-                    println("[장바구니에 담긴 상품]\n${i + 1}. ${choicedMenuList[i].name} | ${choicedMenuList[i].price}원")
-                }
+                printShoppingCartList()
             }
 
             else ->
@@ -68,14 +52,32 @@ class RecommendInfo() : Display {
 
     fun printRecommandMenu() {
         var randomNumber = mutableSetOf<Int>()
-                randomNumber = getRandomNumber()
-                println("[추천 메뉴]\n")
-                for (i in 0 until randomNumber.size) {
-                    println("${i+1}. ${DrinkAndMacCafe.macCafeList[randomNumber.indexOf(i)].name} | ${DrinkAndMacCafe.macCafeList[randomNumber.indexOf(i)].price}원 | ${DrinkAndMacCafe.macCafeList[randomNumber.indexOf(i)].info}")
-                }
+        randomNumber = getRandomNumber()
+        println("[추천 메뉴]\n")
+        for (i in 0 until randomNumber.size) {
+            println(
+                "${randomNumber.elementAt(i)}. ${DrinkAndMacCafe.macCafeList[randomNumber.elementAt(i)].name} | ${
+                    DrinkAndMacCafe.macCafeList[randomNumber.elementAt(
+                        i
+                    )].price
+                }원 | ${DrinkAndMacCafe.macCafeList[randomNumber.elementAt(i)].info}"
+            )
+        }
     }
 
-    fun initListData(list: List<Product>){
+    fun printShoppingCartList() {
+        println("[장바구니에 담긴 상품]")
+        for (i in 0 until choicedMenuList.size) {
+            println("${i + 1}. ${choicedMenuList[i].name} | ${choicedMenuList[i].price}원 | ${choicedMenuList[i]}")
+        }
+    }
+
+
+    fun saveChoiceMenu(saveList: List<Product>, index: Int) =
+        choicedMenuList.add(saveList[index - 1])
+
+
+    fun initListData(list: List<Product>) {
         listData = list.map { it.copy() }
     }
 

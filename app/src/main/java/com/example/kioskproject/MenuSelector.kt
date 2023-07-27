@@ -1,7 +1,6 @@
 package com.example.kioskproject
 
 import com.example.kioskproject.abstract.InputHandler
-import com.example.kioskproject.model.Product
 import com.example.kioskproject.util.GatherString
 import java.lang.Exception
 import java.util.Scanner
@@ -9,31 +8,18 @@ import kotlin.system.exitProcess
 
 /// 메뉴 선택에 따른 분기처리 Handling
 class MenuSelector : InputHandler {
-    // MacMorining
     var MacMorning: MacMorning
-
-    // MacLunch
     var MacLunch: MacLunch
-
-    //Burger
     var Burger: Burger
-
-    // HappyMeal
     var happyMeal: HappyMeal
-
-    // McCafe
     var mcCafeAndDrink: DrinkAndMacCafe
-
-    // HappySnack
     var happySnack: HappySnack
-
-    // SideAndDessert
     var sideAndDessert: SideAndDessert
-
-    var recommendInfo: RecommendInfo
+    var shoppingCart: ShoppingCart
+    var payment: Payment
 
     var res: Int = 0
-    lateinit var recoInfo: RecommendInfo
+    lateinit var recoInfo: ShoppingCart
 
 
     init {
@@ -44,7 +30,8 @@ class MenuSelector : InputHandler {
         mcCafeAndDrink = DrinkAndMacCafe()
         happySnack = HappySnack()
         sideAndDessert = SideAndDessert()
-        recommendInfo = RecommendInfo()
+        shoppingCart = ShoppingCart()
+        payment = Payment()
     }
 
     // 실제 프로그램 분기 Handler
@@ -54,15 +41,10 @@ class MenuSelector : InputHandler {
                 // Burger
                 Burger.displayInfo()
                 res = inputHandlerInt(Burger.burgerList)
-                recommendInfo.initListData(Burger.burgerList)
 
-                var choicedMenuList = recoInfo.showRecommendation()
-                var price = 0
-                for (i in 0 until choicedMenuList.size) {
-                    price += choicedMenuList[i].price.toInt()
-                }
-                var payment = Payment(price)
-                payment.pay()
+                shoppingCart.saveChoiceMenu(Burger.burgerList, res)
+                shoppingCart.run(res, Burger.burgerList)
+                payment.pay(shoppingCart.choicedMenuList)
             }
 
             2 -> {
@@ -70,15 +52,9 @@ class MenuSelector : InputHandler {
                 MacLunch.displayInfo()
                 res = inputHandlerInt(MacLunch.macLunchList)
 
-                recommendInfo.initListData(Burger.burgerList)
-
-                var choicedMenuList = recoInfo.showRecommendation()
-                var price = 0
-                for (i in 0 until choicedMenuList.size) {
-                    price += choicedMenuList[i].price.toInt()
-                }
-                var payment = Payment(price)
-                payment.pay()
+                shoppingCart.saveChoiceMenu(MacLunch.macLunchList, res)
+                shoppingCart.run(res, MacLunch.macLunchList)
+                payment.pay(shoppingCart.choicedMenuList)
             }
 
             3 -> {
@@ -86,17 +62,10 @@ class MenuSelector : InputHandler {
                 MacMorning.displayInfo()
                 res = inputHandlerInt(MacMorning.MacMorniningList)
 
-                recommendInfo.initListData(Burger.burgerList)
+                shoppingCart.saveChoiceMenu(MacMorning.MacMorniningList, res)
+                shoppingCart.run(res, MacMorning.MacMorniningList)
+                payment.pay(shoppingCart.choicedMenuList)
 
-                // 쇼핑카트 객체 생성
-                recoInfo = RecommendInfo(res, MacMorning.MacMorniningList)
-                var choicedMenuList = recoInfo.showRecommendation()
-                var price = 0
-                for (i in 0 until choicedMenuList.size) {
-                    price += choicedMenuList[i].price.toInt()
-                }
-                var payment = Payment(price)
-                payment.pay()
             }
 
 
@@ -105,30 +74,21 @@ class MenuSelector : InputHandler {
                 happySnack.displayInfo()
                 res = inputHandlerInt(happySnack.happySnack)
 
-                recommendInfo.initListData(Burger.burgerList)
+                shoppingCart.saveChoiceMenu(happySnack.happySnack, res)
+                shoppingCart.run(res, happySnack.happySnack)
+                payment.pay(shoppingCart.choicedMenuList)
 
-                recoInfo = RecommendInfo(res, happySnack.happySnack)
-                var choicedMenuList = recoInfo.showRecommendation()
-                var price = 0
-                for (i in 0 until choicedMenuList.size) {
-                    price += choicedMenuList[i].price.toInt()
-                }
-                var payment = Payment(price)
-                payment.pay()
             }
 
             5 -> {
                 // Side&Dessert
                 sideAndDessert.displayInfo()
                 res = inputHandlerInt(sideAndDessert.sideAndDessert)
-                recommendInfo.initListData(Burger.burgerList)
-                var choicedMenuList = recoInfo.showRecommendation()
-                var price = 0
-                for (i in 0 until choicedMenuList.size) {
-                    price += choicedMenuList[i].price.toInt()
-                }
-                var payment = Payment(price)
-                payment.pay()
+
+                shoppingCart.saveChoiceMenu(sideAndDessert.sideAndDessert, res)
+                shoppingCart.run(res, sideAndDessert.sideAndDessert)
+                payment.pay(shoppingCart.choicedMenuList)
+
             }
 
             6 -> {
@@ -136,15 +96,10 @@ class MenuSelector : InputHandler {
                 mcCafeAndDrink.displayInfo()
                 res = inputHandlerInt(mcCafeAndDrink.macCafeList)
 
-                recommendInfo.initListData(Burger.burgerList)
-                var choicedMenuList = recoInfo.showRecommendation()
+                shoppingCart.saveChoiceMenu(mcCafeAndDrink.macCafeList, res)
+                shoppingCart.run(res, mcCafeAndDrink.macCafeList)
+                payment.pay(shoppingCart.choicedMenuList)
 
-                var price = 0
-                for (i in 0 until choicedMenuList.size) {
-                    price += choicedMenuList[i].price.toInt()
-                }
-                var payment = Payment(price)
-                payment.pay()
             }
 
             7 -> {
@@ -152,14 +107,10 @@ class MenuSelector : InputHandler {
                 happyMeal.displayInfo()
                 res = inputHandlerInt(happyMeal.happyMealList)
 
-                recommendInfo.initListData(Burger.burgerList)
-                var choicedMenuList = recoInfo.showRecommendation()
-                var price = 0
-                for (i in 0 until choicedMenuList.size) {
-                    price += choicedMenuList[i].price.toInt()
-                }
-                var payment = Payment(price)
-                payment.pay()
+                shoppingCart.saveChoiceMenu(happyMeal.happyMealList, res)
+                shoppingCart.run(res, happyMeal.happyMealList)
+                payment.pay(shoppingCart.choicedMenuList)
+
             }
 
             8 -> {
@@ -187,4 +138,6 @@ class MenuSelector : InputHandler {
         //TODO 장바구니 기능추가
         //TODO 장바구니에 추가했을경우 메뉴판 && ORDER MENU 등장 아닐경우 처음 메뉴판만 띄우기
     }
+
+
 }
