@@ -6,7 +6,7 @@ import com.example.kioskproject.util.GatherString
 
 class Burger : Display {
     var title = "[Burger MENU]"
-    var burgerList = listOf(
+    var list = listOf(
         Product(
             "진도 대파 크림 크로켓 버거",
             "7500",
@@ -18,7 +18,7 @@ class Burger : Display {
         Product(
             "쿼터파운더 치즈",
             "5800",
-            "쿼터파운더라는 이름에서 알 수 있듯이 두 배 이상 커진 1/4파운드(113그램) 비프와 부드러운 치즈 두 장의 환상궁합! 두툼한 순 쇠고기 패티와 신선한 치즈의 풍부한 맛으로 세계적으로 사랑받고 있는맥도날드의 대표적인 프리미엄 버거"),
+            "쿼터파운더라는 이름에서 알 수 있듯이 두 배 이상 커진 1/4파운드(113그램) 비프와 부드러운 치즈 두 장의 환상궁합! 두툼한 순 쇠고기 패티와 신선한 치즈의 풍부한 맛으로 세계적으로 사랑받고 있는맥도날드의 대표적인 프리미엄 버거g"),
         Product(
             "맥크리스피 디럭스 버거",
             "7100",
@@ -75,8 +75,8 @@ class Burger : Display {
 
     override fun displayInfo() {
         super.displayInfo()
-        for(i in 0 until burgerList.size) {
-            println("${i+1}. ${burgerList[i].name} | ${burgerList[i].price}원 | ${burgerList[i].info}")
+        for(i in 0 until list.size) {
+            println("${i+1}. ${list[i].name} | ${list[i].price}원 | ${list[i].info}")
         }
         println(GatherString.backTxt)
     }

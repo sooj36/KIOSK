@@ -6,7 +6,7 @@ import com.example.kioskproject.util.GatherString
 
 class HappyMeal : Display {
     var title = "[HappyMeal MENU]"
-    var macMorningList = listOf<Product>(
+    var list = listOf<Product>(
         Product("에그 맥머핀", "3800", "캐나디안 스타일 베이컨과 계란의 클래식한 만남,맥도날드의 아침을 탄생하게 한 바로 그 메뉴."),
         Product(
             "핫케익 2조각",
