@@ -23,14 +23,17 @@ class Payment() {
         println("결제 방식을 선택해주세요.\na. 현금 \nb. 신용카드")
 
         var payOption = readLine()!!.toString()
-        var userMoney = (5000..100000).random()
+        var userMoney = (5000..50000).random()
         when (payOption) {
             // 현금 결제
             "a" -> {
                 if (price > userMoney) {
                     println("현재 잔액은 $userMoney 이므로 ${price - userMoney}원이 부족해서 주문할 수 없습니다.")
                 } else {
-                    println("이용해주셔서 감사합니다. 안녕히가십시오.")
+                    println(
+                        "주문번호 ${customerNum}번 고객님 ${cookingTime}분 후 음식이 완료될 예정입니다.\n" +
+                                "\n"
+                    )
                 }
                 exitProcess(0)
             }

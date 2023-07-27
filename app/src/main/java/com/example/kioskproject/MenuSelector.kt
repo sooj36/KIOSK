@@ -18,6 +18,8 @@ class MenuSelector : InputHandler {
     var happySnack: HappySnack
     var sideAndDessert: SideAndDessert
     var shoppingCart: ShoppingCart
+    var recommendMenu : RecommendMenu
+    var orderPage : OrderPage
     var payment: Payment
 
     var res: Int = 0
@@ -33,10 +35,14 @@ class MenuSelector : InputHandler {
         happySnack = HappySnack()
         sideAndDessert = SideAndDessert()
         shoppingCart = ShoppingCart()
+        recommendMenu = RecommendMenu()
+        orderPage = OrderPage()
         payment = Payment()
+
         initMenuList()
     }
 
+    // 전체메뉴 데이터init
     fun initMenuList() {
         menuList = mutableMapOf(
             macMorning.javaClass.simpleName to macMorning.list,
@@ -114,10 +120,10 @@ class MenuSelector : InputHandler {
             }
 
             9 -> {
-                shoppingCart.printOrderdMenus(payment)
-                shoppingCart.displayInfo()
-                shoppingCart.userInputHandler()
-                shoppingCart.finalOrderConfirm(payment)
+                orderPage.printSelectedMenu(payment, shoppingCart.choicedMenuList)
+                recommendMenu.displayInfo()
+                recommendMenu.recommendInputHandler(shoppingCart)
+                orderPage.finalOrderConfirm(payment)
             }
 
             10 -> {
@@ -127,9 +133,9 @@ class MenuSelector : InputHandler {
     }
 
     override fun inputHandlerInt(list: List<Product>): Int {
+        var scanner = Scanner(System.`in`)
+        var res = scanner.nextInt()
         try {
-            var scanner = Scanner(System.`in`)
-            var res = scanner.nextInt()
             if (res < 0 || res > list.size) {
                 println(GatherString.exceptionNumber)
             }

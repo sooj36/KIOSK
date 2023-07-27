@@ -19,10 +19,9 @@ class KeyoskProgram : Display, InputHandler {
         while (true) {
             displayInfo()
             if(menuSelector.shoppingCart.choicedMenuList.isNotEmpty()) {
-                menuSelector.shoppingCart.printOrderMenu()
+                menuSelector.orderPage.printOrderMenu()
             }
             menuSelector.handler(intInputHandler())
-
         }
     }
 
