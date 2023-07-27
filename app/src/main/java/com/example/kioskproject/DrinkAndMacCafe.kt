@@ -6,7 +6,7 @@ import com.example.kioskproject.util.GatherString
 
 class DrinkAndMacCafe: Display {
     var title = "[DrinkAndMacCafe MENU]"
-    var macCafeList = listOf(
+    var list = listOf(
         Product("디카페인 아이스크림 라떼", "4100", "입안 가득 달콤한 아이스크림과 바로 내린 100% 친환경 커피 & 신선한 우유를 담은 진한 라떼의 만남! 이제 디카페인으로도 즐겨보세요!"),
         Product("아이스크림 라떼", "3300", "입안 가득 달콤한 아이스크림과 바로 내린 100% 친환경 커피 & 신선한 우유를 담은 진한 라떼의 만남! 이전 메뉴다음 메뉴"),
         Product("자두 천도복숭아 칠러", "2700", "상콤한 자두와 달콤한 천도복숭아의 만남! 자두 천도복숭아 칠러"),
@@ -33,8 +33,8 @@ class DrinkAndMacCafe: Display {
 
     override fun displayInfo() {
         super.displayInfo()
-        for(i in 0 until macCafeList.size) {
-           println("${i+1}. ${macCafeList[i].name} | ${macCafeList[i].price}원 | ${macCafeList[i].info}")
+        for(i in 0 until list.size) {
+           println("${i+1}. ${list[i].name} | ${list[i].price}원 | ${list[i].info}")
         }
         println(GatherString.backTxt)
     }

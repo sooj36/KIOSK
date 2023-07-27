@@ -8,7 +8,7 @@ import com.example.kioskproject.util.GatherString
 class MacLunch: Display {
     var title = "[점심만의 특별한 할인으로 즐길 수 있는 [맥런치 세트]를 만나보세요]"
 
-    var macLunchList = listOf(
+    var list = listOf(
         Product(
             "진도 대파 크림 크로켓 버거 세트",
             "8000", "100% 국내산 진도 대파가 들어간 겉바속촉 크로켓에 구운 대파 마요 소스로 풍미 가득!"),
@@ -45,8 +45,8 @@ class MacLunch: Display {
 
         override fun displayInfo() {
             super.displayInfo()
-            for(i in 0 until macLunchList.size) {
-                println("${i+1}. ${macLunchList[i].name} | ${macLunchList[i].price}원 | ${macLunchList[i].info}")
+            for(i in 0 until list.size) {
+                println("${i+1}. ${list[i].name} | ${list[i].price}원 | ${list[i].info}")
             }
             println(GatherString.backTxt)
         }

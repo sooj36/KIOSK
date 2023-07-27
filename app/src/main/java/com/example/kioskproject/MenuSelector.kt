@@ -1,5 +1,6 @@
 package com.example.kioskproject
 
+import com.example.kioskproject.abstract.Display
 import com.example.kioskproject.abstract.InputHandler
 import com.example.kioskproject.model.Product
 import com.example.kioskproject.util.GatherString
@@ -9,40 +10,49 @@ import kotlin.system.exitProcess
 
 /// 메뉴 선택에 따른 분기처리 Handling
 class MenuSelector : InputHandler {
-    // MacMorining
-    var MacMorning: MacMorning
-
-    // MacLunch
-    var MacLunch: MacLunch
-
-    //Burger
-    var Burger: Burger
-
-    // HappyMeal
+    var macMorning: MacMorning
+    var macLunch: MacLunch
+    var burger: Burger
     var happyMeal: HappyMeal
-
-    // McCafe
     var mcCafeAndDrink: DrinkAndMacCafe
-
-    // HappySnack
     var happySnack: HappySnack
-  
-    // SideAndDessert
     var sideAndDessert: SideAndDessert
+    var shoppingCart: ShoppingCart
+    var recommendMenu : RecommendMenu
+    var orderPage : OrderPage
+    var payment: Payment
 
-    var res : Int = 0
-    lateinit var recoInfo : RecommendInfo
-
-
+    var res: Int = 0
+    lateinit var recoInfo: ShoppingCart
+    lateinit var menuList: MutableMap<String, List<Product>>
 
     init {
-        MacMorning = MacMorning()
-        MacLunch = MacLunch()
-        Burger = Burger()
+        macMorning = MacMorning()
+        macLunch = MacLunch()
+        burger = Burger()
         happyMeal = HappyMeal()
         mcCafeAndDrink = DrinkAndMacCafe()
         happySnack = HappySnack()
         sideAndDessert = SideAndDessert()
+        shoppingCart = ShoppingCart()
+        recommendMenu = RecommendMenu()
+        orderPage = OrderPage()
+        payment = Payment()
+
+        initMenuList()
+    }
+
+    // 전체메뉴 데이터init
+    fun initMenuList() {
+        menuList = mutableMapOf(
+            macMorning.javaClass.simpleName to macMorning.list,
+            macLunch.javaClass.simpleName to macLunch.list,
+            burger.javaClass.simpleName to burger.list,
+            happyMeal.javaClass.simpleName to happyMeal.list,
+            mcCafeAndDrink.javaClass.simpleName to mcCafeAndDrink.list,
+            happySnack.javaClass.simpleName to happySnack.list,
+            sideAndDessert.javaClass.simpleName to sideAndDessert.list
+        )
     }
 
     // 실제 프로그램 분기 Handler
@@ -50,112 +60,57 @@ class MenuSelector : InputHandler {
         when (select) {
             1 -> {
                 // Burger
-                Burger.displayInfo()
-                res = inputHandlerInt(Burger.burgerList)
-
-                // 쇼핑카트 객체 생성
-                recoInfo = RecommendInfo(res, Burger.burgerList )
-                var choicedMenuList = recoInfo.showRecommendation()
-                var price = 0
-                for(i in 0 until choicedMenuList.size){
-                    price +=  choicedMenuList[i].price.toInt()
-                }
-                var payment = Payment(price)
-                payment.pay()
+                runSelectedMenu<Burger>(burger, menuList.getValue(burger.javaClass.simpleName))
             }
 
             2 -> {
                 // MacLunch
-                MacLunch.displayInfo()
-                res = inputHandlerInt(MacLunch.macLunchList)
-
-                // 쇼핑카트 객체 생성
-                recoInfo = RecommendInfo(res, MacLunch.macLunchList )
-                var choicedMenuList = recoInfo.showRecommendation()
-                var price = 0
-                for(i in 0 until choicedMenuList.size){
-                    price +=  choicedMenuList[i].price.toInt()
-                }
-                var payment = Payment(price)
-                payment.pay()
+                runSelectedMenu<MacLunch>(
+                    macLunch,
+                    menuList.getValue(macLunch.javaClass.simpleName)
+                )
             }
 
             3 -> {
                 // MacMorning
-                MacMorning.displayInfo()
-                res = inputHandlerInt(MacMorning.MacMorniningList)
-
-                // 쇼핑카트 객체 생성
-                recoInfo = RecommendInfo(res, MacMorning.MacMorniningList )
-                var choicedMenuList = recoInfo.showRecommendation()
-                var price = 0
-                for(i in 0 until choicedMenuList.size){
-                    price +=  choicedMenuList[i].price.toInt()
-                }
-                var payment = Payment(price)
-                payment.pay()
+                runSelectedMenu<MacMorning>(
+                    macMorning,
+                    menuList.getValue(macMorning.javaClass.simpleName)
+                )
             }
 
 
             4 -> {
                 // HappySnack
-                happySnack.displayInfo()
-                res = inputHandlerInt(happySnack.happySnack)
-
-                // 쇼핑카트 객체 생성
-                recoInfo = RecommendInfo(res, happySnack.happySnack )
-                var choicedMenuList = recoInfo.showRecommendation()
-                var price = 0
-                for(i in 0 until choicedMenuList.size){
-                    price +=  choicedMenuList[i].price.toInt()
-                }
-                var payment = Payment(price)
-                payment.pay()
+                runSelectedMenu<HappySnack>(
+                    happySnack,
+                    menuList.getValue(happySnack.javaClass.simpleName)
+                )
             }
 
             5 -> {
                 // Side&Dessert
-                sideAndDessert.displayInfo()
-                res = inputHandlerInt(sideAndDessert.sideAndDessert)
-
-                recoInfo = RecommendInfo(res, sideAndDessert.sideAndDessert)
-                var choicedMenuList = recoInfo.showRecommendation()
-                var price = 0
-                for(i in 0 until choicedMenuList.size){
-                    price +=  choicedMenuList[i].price.toInt()
-                }
-                var payment = Payment(price)
-                payment.pay()
+                runSelectedMenu<SideAndDessert>(
+                    sideAndDessert,
+                    menuList.getValue(sideAndDessert.javaClass.simpleName)
+                )
             }
 
             6 -> {
                 // McCafe&Drink
-                mcCafeAndDrink.displayInfo()
-                res = inputHandlerInt(mcCafeAndDrink.macCafeList)
+                runSelectedMenu<DrinkAndMacCafe>(
+                    mcCafeAndDrink,
+                    menuList.getValue(mcCafeAndDrink.javaClass.simpleName)
+                )
 
-                recoInfo = RecommendInfo(res, mcCafeAndDrink.macCafeList)
-                var choicedMenuList = recoInfo.showRecommendation()
-                var price = 0
-                for(i in 0 until choicedMenuList.size){
-                    price +=  choicedMenuList[i].price.toInt()
-                }
-                var payment = Payment(price)
-                payment.pay()
             }
 
             7 -> {
                 // HappyMeal
-                happyMeal.displayInfo()
-                res = inputHandlerInt(happyMeal.happyMealList)
-
-                recoInfo = RecommendInfo(res, happyMeal.happyMealList)
-                var choicedMenuList = recoInfo.showRecommendation()
-                var price = 0
-                for(i in 0 until choicedMenuList.size){
-                    price +=  choicedMenuList[i].price.toInt()
-                }
-                var payment = Payment(price)
-                payment.pay()
+                runSelectedMenu<HappyMeal>(
+                    happyMeal,
+                    menuList.getValue(happyMeal.javaClass.simpleName)
+                )
             }
 
             8 -> {
@@ -163,24 +118,42 @@ class MenuSelector : InputHandler {
                 println(GatherString.exitProgram)
                 exitProcess(0)
             }
+
+            9 -> {
+                orderPage.printSelectedMenu(payment, shoppingCart.choicedMenuList)
+                recommendMenu.displayInfo()
+                recommendMenu.recommendInputHandler(shoppingCart)
+                orderPage.finalOrderConfirm(payment)
+            }
+
+            10 -> {
+                shoppingCart.choicedMenuList.clear()
+            }
         }
     }
 
-    override fun <T> inputHandlerInt(list: List<T>) : Int {
+    override fun inputHandlerInt(list: List<Product>): Int {
         var scanner = Scanner(System.`in`)
         var res = scanner.nextInt()
         try {
             if (res < 0 || res > list.size) {
                 println(GatherString.exceptionNumber)
-                inputHandlerInt<T>(list)
             }
         } catch (e: Exception) {
+            handler(res)
             println(GatherString.exceptionError)
-            inputHandlerInt<T>(list)
         }
         return res
+    }
 
-        //TODO 장바구니 기능추가
-        //TODO 장바구니에 추가했을경우 메뉴판 && ORDER MENU 등장 아닐경우 처음 메뉴판만 띄우기
+    // 선택된 메뉴 장바구니추가 선택팝업 띄워줌
+    fun <T> runSelectedMenu(instance: Display, list: List<Product>) {
+        instance.displayInfo()
+        res = inputHandlerInt(list)
+        if (res == 0) {
+            return
+        } else {
+            shoppingCart.savePopup(list, res)
+        }
     }
 }

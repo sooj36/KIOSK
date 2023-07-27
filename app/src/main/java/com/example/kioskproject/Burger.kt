@@ -6,7 +6,7 @@ import com.example.kioskproject.util.GatherString
 
 class Burger : Display {
     var title = "[Burger MENU]"
-    var burgerList = listOf(
+    var list = listOf(
         Product(
             "진도 대파 크림 크로켓 버거",
             "7500",
@@ -75,8 +75,8 @@ class Burger : Display {
 
     override fun displayInfo() {
         super.displayInfo()
-        for(i in 0 until burgerList.size) {
-            println("${i+1}. ${burgerList[i].name} | ${burgerList[i].price}원 | ${burgerList[i].info}")
+        for(i in 0 until list.size) {
+            println("${i+1}. ${list[i].name} | ${list[i].price}원 | ${list[i].info}")
         }
         println(GatherString.backTxt)
     }
