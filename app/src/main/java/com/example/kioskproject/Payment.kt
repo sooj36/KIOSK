@@ -19,11 +19,9 @@ class Payment(price : Int) {
     }
     fun pay(){
 
-        // TODO : 장바구니에서 담은 상품의 총액을 받아와서 출력하는 기능 개발
-        println("결제하실 금액은 ${price}원 입니다.")
+        println("\n결제하실 금액은 ${price}원 입니다.")
         println("결제 방식을 선택해주세요.\na. 현금 \nb. 신용카드")
 
-        // 결제방식 변수 선언
         var payOption = readLine()!!.toString()
         when(payOption){
             // 현금 결제
@@ -37,7 +35,7 @@ class Payment(price : Int) {
                 var job = GlobalScope.launch{
                     delay(1000)
                     println("결제중 입니다.. 잠시만 기다려 주세요!")
-                    delay(3000)
+                    delay(2000)
                     println("결제가 완료되었습니다.")
                     delay(1000)
                 }
