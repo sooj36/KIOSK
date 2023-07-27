@@ -5,17 +5,17 @@ import com.example.kioskproject.util.GatherString
 import java.util.ArrayList
 import kotlin.random.Random // 랜덤 생성
 
-class RecommendInfo(res : Int) {
+class RecommendInfo(res : Int, list : List<Product>) {
     var res : Int
+    var list : List<Product>
+
     var DrinkAndMacCafe : DrinkAndMacCafe = DrinkAndMacCafe() //클래스에 instance를 만든다 = 메모리에 올린다
-    var happySnack = HappySnack()
 
     // 선택한 메뉴를 저장할 리스트 생성
     var choicedMenuList = mutableListOf<Product>()
-    // 싱글톤을 사용하면 객체가 한개니까 다른 함수나 클래스에서 사용해도 파일의 무결성이 지켜지지 않을까..?
-    // companion object var choicedMenu = mutableListOf<Product>()
     init{
         this.res = res
+        this.list = list
     }
     fun showRecommendation() : MutableList<Product> {
         var randomNumber = (0..DrinkAndMacCafe.macCafeList.size-1).random() //랜덤 메뉴를 선택하기 위해 Random 클래스 생성 / 맥카페 리스트 개수
@@ -45,7 +45,7 @@ class RecommendInfo(res : Int) {
             var choicedNumber: Int = readLine()!!.toInt()
 
             // 메뉴화면에서 선택한 메뉴 choicedMenuList에 추가
-            choicedMenuList.add(happySnack.happySnack[(res)-1])
+            choicedMenuList.add(list[(res)-1])
             // 추천메뉴에서 선택한 메뉴 choicedMenuList에 추가
             choicedMenuList.add(DrinkAndMacCafe.macCafeList[choicedNumber])
 
@@ -62,9 +62,9 @@ class RecommendInfo(res : Int) {
 
             println("[선택한 메뉴]")
             // 메뉴화면에서 선택한 메뉴 choicedMenuList에 추가
-            choicedMenuList.add(happySnack.happySnack[(res) - 1])
+            choicedMenuList.add(list[(res) - 1])
             // choicedMenuList에 담긴 값 출력 후 리스트 반환
-            for (i in 0..choicedMenuList.size) {
+            for (i in 0 until choicedMenuList.size) {
                 println("[장바구니에 담긴 상품]\n${i + 1}. ${choicedMenuList[i].name} | ${choicedMenuList[i].price}원")
             }
             return choicedMenuList
@@ -77,28 +77,3 @@ class RecommendInfo(res : Int) {
         return choicedMenuList
     }
 }
-
-// === 복원용 코드 ===
-//            try {
-//                var choicedNumber: Int = readLine()!!.toInt()
-//                choicedMenuList.add(DrinkAndMacCafe.macCafeList[choicedNumber])
-//
-//                for (i in 0..choicedMenuList.size) {
-//                    println("[장바구니에 담긴 상품]\n${i + 1}. ${choicedMenuList[i].name} | ${choicedMenuList[i].price}원")
-//                    return choicedMenuList
-//                }
-//            } catch(e: Exception){
-//                println("")
-//            }
-
-//            try {
-//                println("[선택한 메뉴]")
-//                choicedMenuList.add(happySnack.happySnack[(res)-1])
-//                for (i in 0..choicedMenuList.size) {
-//                    println("[장바구니에 담긴 상품]\n${i + 1}. ${choicedMenuList[i].name} | ${choicedMenuList[i].price}원")
-//                    return choicedMenuList
-//                }
-//                } catch (e: Exception) {
-//
-//                }
-//            }

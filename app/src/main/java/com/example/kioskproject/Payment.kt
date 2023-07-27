@@ -26,7 +26,7 @@ class Payment(price : Int) {
         when(payOption){
             // 현금 결제
             "a" -> {
-                println("카운터에서 도와드리겠습니다.")
+                println("카운터에서 도와드리겠습니다.\n\n")
             }
             // 카드 결제
             "b" -> {
@@ -44,7 +44,8 @@ class Payment(price : Int) {
                     job.join()
                 }
 
-                println("주문번호 ${customerNum}번 고객님 ${cookingTime}분 후 음식이 완료될 예정입니다.")
+                println("주문번호 ${customerNum}번 고객님 ${cookingTime}분 후 음식이 완료될 예정입니다.\n" +
+                        "\n")
             }
 
         }
