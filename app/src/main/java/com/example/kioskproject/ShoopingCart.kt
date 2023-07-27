@@ -3,8 +3,6 @@ package com.example.kioskproject
 import com.example.kioskproject.model.Product
 import com.example.kioskproject.abstract.Display
 import com.example.kioskproject.util.GatherString
-import kotlinx.coroutines.selects.select
-import kotlin.system.exitProcess
 
 class ShoppingCart : Display {
     var DrinkAndMacCafe = DrinkAndMacCafe()
@@ -61,7 +59,7 @@ class ShoppingCart : Display {
         println("10. Cancel | 진행중인 주문을 취소합니다.")
     }
 
-    fun printConfirmOrder(payment: Payment) {
+    fun printOrderdMenus(payment: Payment) {
         println("아래와 같이 주문하시겠습니까?")
         println("[ Orders ]")
         for(i in 0 until choicedMenuList.size) {

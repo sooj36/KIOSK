@@ -22,7 +22,7 @@ class MenuSelector : InputHandler {
 
     var res: Int = 0
     lateinit var recoInfo: ShoppingCart
-
+    var MenuList : Map<String, List<Product>> = mutableMapOf()
 
     init {
         MacMorning = MacMorning()
@@ -41,42 +41,39 @@ class MenuSelector : InputHandler {
         when (select) {
             1 -> {
                 // Burger
-                isEmptyShoppingCart<Burger>(Burger, Burger.burgerList)
+                runSelectedMenu<Burger>(Burger, Burger.burgerList)
             }
 
             2 -> {
                 // MacLunch
-                isEmptyShoppingCart<MacLunch>(MacLunch, MacLunch.macLunchList)
+                runSelectedMenu<MacLunch>(MacLunch, MacLunch.macLunchList)
             }
 
             3 -> {
                 // MacMorning
-                isEmptyShoppingCart<MacMorning>(MacMorning, MacMorning.MacMorniningList)
+                runSelectedMenu<MacMorning>(MacMorning, MacMorning.MacMorniningList)
             }
 
 
             4 -> {
                 // HappySnack
-                isEmptyShoppingCart<HappySnack>(happySnack, happySnack.happySnackList)
+                runSelectedMenu<HappySnack>(happySnack, happySnack.happySnackList)
             }
 
             5 -> {
                 // Side&Dessert
-                isEmptyShoppingCart<SideAndDessert>(
-                    sideAndDessert,
-                    sideAndDessert.sideAndDessertList
-                )
+                runSelectedMenu<SideAndDessert>(sideAndDessert, sideAndDessert.sideAndDessertList)
             }
 
             6 -> {
                 // McCafe&Drink
-                isEmptyShoppingCart<DrinkAndMacCafe>(mcCafeAndDrink, mcCafeAndDrink.macCafeList)
+                runSelectedMenu<DrinkAndMacCafe>(mcCafeAndDrink, mcCafeAndDrink.macCafeList)
 
             }
 
             7 -> {
                 // HappyMeal
-                isEmptyShoppingCart<HappyMeal>(happyMeal, happyMeal.happyMealList)
+                runSelectedMenu<HappyMeal>(happyMeal, happyMeal.happyMealList)
             }
 
             8 -> {
@@ -86,7 +83,7 @@ class MenuSelector : InputHandler {
             }
 
             9 -> {
-                shoppingCart.printConfirmOrder(payment)
+                shoppingCart.printOrderdMenus(payment)
                 shoppingCart.displayInfo()
                 shoppingCart.userInputHandler()
                 shoppingCart.finalOrderConfirm(payment)
@@ -113,7 +110,8 @@ class MenuSelector : InputHandler {
         return res
     }
 
-    fun <T> isEmptyShoppingCart(instance: Display, list: List<Product>) {
+    // 선택된 메뉴 장바구니추가 선택팝업 띄워줌
+    fun <T> runSelectedMenu(instance: Display, list: List<Product>) {
         instance.displayInfo()
         res = inputHandlerInt(list)
         if (res == 0) {
@@ -122,5 +120,4 @@ class MenuSelector : InputHandler {
             shoppingCart.savePopup(list, res)
         }
     }
-
 }
