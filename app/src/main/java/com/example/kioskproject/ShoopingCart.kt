@@ -68,6 +68,7 @@ class RecommendInfo(res : Int, list : List<Product>) {
                 println("[장바구니에 담긴 상품]\n${i + 1}. ${choicedMenuList[i].name} | ${choicedMenuList[i].price}원")
             }
             return choicedMenuList
+
         }
 
         // 3.
