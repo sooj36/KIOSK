@@ -6,18 +6,10 @@ import com.example.kioskproject.util.GatherString
 
 class ShoppingCart : Display {
     var DrinkAndMacCafe = DrinkAndMacCafe()
-
     // 선택한 메뉴를 저장할 리스트 생성
     var choicedMenuList = mutableListOf<Product>()
 
-    fun getRandomNumber(): MutableSet<Int> {
-        var randomNumber = mutableSetOf<Int>()
-        loop@ while (true) {
-            randomNumber.add((0..DrinkAndMacCafe.macCafeList.size - 1).random()) //랜덤 메뉴를 선택하기 위해 Random 클래스 생성 / 맥카페 리스트 개수
-            if (randomNumber.size == 3) break@loop
-        }
-        return randomNumber
-    }
+
 
     fun userInputHandler() {
         var input = readLine() ?: ""
@@ -25,7 +17,7 @@ class ShoppingCart : Display {
             "a" -> {
                 printRecommandMenu()
                 var choicedNumber: Int = readLine()!!.toInt()
-                saveChoiceMenu(DrinkAndMacCafe.macCafeList, choicedNumber)
+                saveChoiceMenu(DrinkAndMacCafe.list, choicedNumber)
                 printShoppingCartList()
             }
 
@@ -69,6 +61,15 @@ class ShoppingCart : Display {
        payment.printPrice(choicedMenuList)
     }
 
+    fun getRandomNumber(): MutableSet<Int> {
+        var randomNumber = mutableSetOf<Int>()
+        loop@ while (true) {
+            randomNumber.add((0..DrinkAndMacCafe.list.size - 1).random()) //랜덤 메뉴를 선택하기 위해 Random 클래스 생성 / 맥카페 리스트 개수
+            if (randomNumber.size == 3) break@loop
+        }
+        return randomNumber
+    }
+
     fun printRecommandMenu() {
         var randomNumber = mutableSetOf<Int>()
         randomNumber = getRandomNumber()
@@ -76,14 +77,14 @@ class ShoppingCart : Display {
         for (i in 0 until randomNumber.size) {
             println(
                 "${randomNumber.elementAt(i)}. ${
-                    DrinkAndMacCafe.macCafeList[randomNumber.elementAt(
+                    DrinkAndMacCafe.list[randomNumber.elementAt(
                         i
                     )].name
                 } | ${
-                    DrinkAndMacCafe.macCafeList[randomNumber.elementAt(
+                    DrinkAndMacCafe.list[randomNumber.elementAt(
                         i
                     )].price
-                }원 | ${DrinkAndMacCafe.macCafeList[randomNumber.elementAt(i)].info}"
+                }원 | ${DrinkAndMacCafe.list[randomNumber.elementAt(i)].info}"
             )
         }
     }

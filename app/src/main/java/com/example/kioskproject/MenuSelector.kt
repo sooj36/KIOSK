@@ -10,9 +10,9 @@ import kotlin.system.exitProcess
 
 /// 메뉴 선택에 따른 분기처리 Handling
 class MenuSelector : InputHandler {
-    var MacMorning: MacMorning
-    var MacLunch: MacLunch
-    var Burger: Burger
+    var macMorning: MacMorning
+    var macLunch: MacLunch
+    var burger: Burger
     var happyMeal: HappyMeal
     var mcCafeAndDrink: DrinkAndMacCafe
     var happySnack: HappySnack
@@ -22,18 +22,31 @@ class MenuSelector : InputHandler {
 
     var res: Int = 0
     lateinit var recoInfo: ShoppingCart
-    var MenuList : Map<String, List<Product>> = mutableMapOf()
+    lateinit var menuList: MutableMap<String, List<Product>>
 
     init {
-        MacMorning = MacMorning()
-        MacLunch = MacLunch()
-        Burger = Burger()
+        macMorning = MacMorning()
+        macLunch = MacLunch()
+        burger = Burger()
         happyMeal = HappyMeal()
         mcCafeAndDrink = DrinkAndMacCafe()
         happySnack = HappySnack()
         sideAndDessert = SideAndDessert()
         shoppingCart = ShoppingCart()
         payment = Payment()
+        initMenuList()
+    }
+
+    fun initMenuList() {
+        menuList = mutableMapOf(
+            macMorning.javaClass.simpleName to macMorning.list,
+            macLunch.javaClass.simpleName to macLunch.list,
+            burger.javaClass.simpleName to burger.list,
+            happyMeal.javaClass.simpleName to happyMeal.list,
+            mcCafeAndDrink.javaClass.simpleName to mcCafeAndDrink.list,
+            happySnack.javaClass.simpleName to happySnack.list,
+            sideAndDessert.javaClass.simpleName to sideAndDessert.list
+        )
     }
 
     // 실제 프로그램 분기 Handler
@@ -41,39 +54,57 @@ class MenuSelector : InputHandler {
         when (select) {
             1 -> {
                 // Burger
-                runSelectedMenu<Burger>(Burger, Burger.burgerList)
+                runSelectedMenu<Burger>(burger, menuList.getValue(burger.javaClass.simpleName))
             }
 
             2 -> {
                 // MacLunch
-                runSelectedMenu<MacLunch>(MacLunch, MacLunch.macLunchList)
+                runSelectedMenu<MacLunch>(
+                    macLunch,
+                    menuList.getValue(macLunch.javaClass.simpleName)
+                )
             }
 
             3 -> {
                 // MacMorning
-                runSelectedMenu<MacMorning>(MacMorning, MacMorning.MacMorniningList)
+                runSelectedMenu<MacMorning>(
+                    macMorning,
+                    menuList.getValue(macMorning.javaClass.simpleName)
+                )
             }
 
 
             4 -> {
                 // HappySnack
-                runSelectedMenu<HappySnack>(happySnack, happySnack.happySnackList)
+                runSelectedMenu<HappySnack>(
+                    happySnack,
+                    menuList.getValue(happySnack.javaClass.simpleName)
+                )
             }
 
             5 -> {
                 // Side&Dessert
-                runSelectedMenu<SideAndDessert>(sideAndDessert, sideAndDessert.sideAndDessertList)
+                runSelectedMenu<SideAndDessert>(
+                    sideAndDessert,
+                    menuList.getValue(sideAndDessert.javaClass.simpleName)
+                )
             }
 
             6 -> {
                 // McCafe&Drink
-                runSelectedMenu<DrinkAndMacCafe>(mcCafeAndDrink, mcCafeAndDrink.macCafeList)
+                runSelectedMenu<DrinkAndMacCafe>(
+                    mcCafeAndDrink,
+                    menuList.getValue(mcCafeAndDrink.javaClass.simpleName)
+                )
 
             }
 
             7 -> {
                 // HappyMeal
-                runSelectedMenu<HappyMeal>(happyMeal, happyMeal.happyMealList)
+                runSelectedMenu<HappyMeal>(
+                    happyMeal,
+                    menuList.getValue(happyMeal.javaClass.simpleName)
+                )
             }
 
             8 -> {
@@ -95,17 +126,16 @@ class MenuSelector : InputHandler {
         }
     }
 
-    override fun <T> inputHandlerInt(list: List<T>): Int {
-        var scanner = Scanner(System.`in`)
-        var res = scanner.nextInt()
+    override fun inputHandlerInt(list: List<Product>): Int {
         try {
+            var scanner = Scanner(System.`in`)
+            var res = scanner.nextInt()
             if (res < 0 || res > list.size) {
                 println(GatherString.exceptionNumber)
-                inputHandlerInt<T>(list)
             }
         } catch (e: Exception) {
+            handler(res)
             println(GatherString.exceptionError)
-            inputHandlerInt<T>(list)
         }
         return res
     }
