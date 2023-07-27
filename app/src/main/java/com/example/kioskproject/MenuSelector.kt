@@ -26,13 +26,14 @@ class MenuSelector : InputHandler {
 
     // HappySnack
     var happySnack: HappySnack
-  
+
     // SideAndDessert
     var sideAndDessert: SideAndDessert
 
-    var res : Int = 0
-    lateinit var recoInfo : RecommendInfo
+    var recommendInfo: RecommendInfo
 
+    var res: Int = 0
+    lateinit var recoInfo: RecommendInfo
 
 
     init {
@@ -43,6 +44,7 @@ class MenuSelector : InputHandler {
         mcCafeAndDrink = DrinkAndMacCafe()
         happySnack = HappySnack()
         sideAndDessert = SideAndDessert()
+        recommendInfo = RecommendInfo()
     }
 
     // 실제 프로그램 분기 Handler
@@ -52,13 +54,12 @@ class MenuSelector : InputHandler {
                 // Burger
                 Burger.displayInfo()
                 res = inputHandlerInt(Burger.burgerList)
+                recommendInfo.initListData(Burger.burgerList)
 
-                // 쇼핑카트 객체 생성
-                recoInfo = RecommendInfo(res, Burger.burgerList )
                 var choicedMenuList = recoInfo.showRecommendation()
                 var price = 0
-                for(i in 0 until choicedMenuList.size){
-                    price +=  choicedMenuList[i].price.toInt()
+                for (i in 0 until choicedMenuList.size) {
+                    price += choicedMenuList[i].price.toInt()
                 }
                 var payment = Payment(price)
                 payment.pay()
@@ -69,12 +70,12 @@ class MenuSelector : InputHandler {
                 MacLunch.displayInfo()
                 res = inputHandlerInt(MacLunch.macLunchList)
 
-                // 쇼핑카트 객체 생성
-                recoInfo = RecommendInfo(res, MacLunch.macLunchList )
+                recommendInfo.initListData(Burger.burgerList)
+
                 var choicedMenuList = recoInfo.showRecommendation()
                 var price = 0
-                for(i in 0 until choicedMenuList.size){
-                    price +=  choicedMenuList[i].price.toInt()
+                for (i in 0 until choicedMenuList.size) {
+                    price += choicedMenuList[i].price.toInt()
                 }
                 var payment = Payment(price)
                 payment.pay()
@@ -85,12 +86,14 @@ class MenuSelector : InputHandler {
                 MacMorning.displayInfo()
                 res = inputHandlerInt(MacMorning.MacMorniningList)
 
+                recommendInfo.initListData(Burger.burgerList)
+
                 // 쇼핑카트 객체 생성
-                recoInfo = RecommendInfo(res, MacMorning.MacMorniningList )
+                recoInfo = RecommendInfo(res, MacMorning.MacMorniningList)
                 var choicedMenuList = recoInfo.showRecommendation()
                 var price = 0
-                for(i in 0 until choicedMenuList.size){
-                    price +=  choicedMenuList[i].price.toInt()
+                for (i in 0 until choicedMenuList.size) {
+                    price += choicedMenuList[i].price.toInt()
                 }
                 var payment = Payment(price)
                 payment.pay()
@@ -102,12 +105,13 @@ class MenuSelector : InputHandler {
                 happySnack.displayInfo()
                 res = inputHandlerInt(happySnack.happySnack)
 
-                // 쇼핑카트 객체 생성
-                recoInfo = RecommendInfo(res, happySnack.happySnack )
+                recommendInfo.initListData(Burger.burgerList)
+
+                recoInfo = RecommendInfo(res, happySnack.happySnack)
                 var choicedMenuList = recoInfo.showRecommendation()
                 var price = 0
-                for(i in 0 until choicedMenuList.size){
-                    price +=  choicedMenuList[i].price.toInt()
+                for (i in 0 until choicedMenuList.size) {
+                    price += choicedMenuList[i].price.toInt()
                 }
                 var payment = Payment(price)
                 payment.pay()
@@ -117,12 +121,11 @@ class MenuSelector : InputHandler {
                 // Side&Dessert
                 sideAndDessert.displayInfo()
                 res = inputHandlerInt(sideAndDessert.sideAndDessert)
-
-                recoInfo = RecommendInfo(res, sideAndDessert.sideAndDessert)
+                recommendInfo.initListData(Burger.burgerList)
                 var choicedMenuList = recoInfo.showRecommendation()
                 var price = 0
-                for(i in 0 until choicedMenuList.size){
-                    price +=  choicedMenuList[i].price.toInt()
+                for (i in 0 until choicedMenuList.size) {
+                    price += choicedMenuList[i].price.toInt()
                 }
                 var payment = Payment(price)
                 payment.pay()
@@ -133,11 +136,12 @@ class MenuSelector : InputHandler {
                 mcCafeAndDrink.displayInfo()
                 res = inputHandlerInt(mcCafeAndDrink.macCafeList)
 
-                recoInfo = RecommendInfo(res, mcCafeAndDrink.macCafeList)
+                recommendInfo.initListData(Burger.burgerList)
                 var choicedMenuList = recoInfo.showRecommendation()
+
                 var price = 0
-                for(i in 0 until choicedMenuList.size){
-                    price +=  choicedMenuList[i].price.toInt()
+                for (i in 0 until choicedMenuList.size) {
+                    price += choicedMenuList[i].price.toInt()
                 }
                 var payment = Payment(price)
                 payment.pay()
@@ -148,11 +152,11 @@ class MenuSelector : InputHandler {
                 happyMeal.displayInfo()
                 res = inputHandlerInt(happyMeal.happyMealList)
 
-                recoInfo = RecommendInfo(res, happyMeal.happyMealList)
+                recommendInfo.initListData(Burger.burgerList)
                 var choicedMenuList = recoInfo.showRecommendation()
                 var price = 0
-                for(i in 0 until choicedMenuList.size){
-                    price +=  choicedMenuList[i].price.toInt()
+                for (i in 0 until choicedMenuList.size) {
+                    price += choicedMenuList[i].price.toInt()
                 }
                 var payment = Payment(price)
                 payment.pay()
@@ -166,7 +170,7 @@ class MenuSelector : InputHandler {
         }
     }
 
-    override fun <T> inputHandlerInt(list: List<T>) : Int {
+    override fun <T> inputHandlerInt(list: List<T>): Int {
         var scanner = Scanner(System.`in`)
         var res = scanner.nextInt()
         try {
