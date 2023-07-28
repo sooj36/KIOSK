@@ -153,7 +153,7 @@ class MenuSelector : InputHandler {
         if (res == 0) {
             return
         } else {
-            shoppingCart.savePopup(list, res)
+            shoppingCart.savePopup(list, res - 1)
         }
     }
 }
