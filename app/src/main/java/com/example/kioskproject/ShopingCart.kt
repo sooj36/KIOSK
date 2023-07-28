@@ -1,11 +1,8 @@
 package com.example.kioskproject
 
 import com.example.kioskproject.model.Product
-import com.example.kioskproject.util.GatherString
-import java.util.ArrayList
-import kotlin.random.Random // 랜덤 생성
 
-class RecommendInfo(res : Int, list : List<Product>) {
+class ShopingCart(res : Int, list : List<Product>) {
     var res : Int
     var list : List<Product>
 
@@ -17,7 +14,7 @@ class RecommendInfo(res : Int, list : List<Product>) {
         this.res = res
         this.list = list
     }
-    fun showRecommendation() : MutableList<Product> {
+    fun showCart() : MutableList<Product> {
         var randomNumber = (0..DrinkAndMacCafe.macCafeList.size-1).random() //랜덤 메뉴를 선택하기 위해 Random 클래스 생성 / 맥카페 리스트 개수
         var randomThree = mutableListOf<Product>() // 3개 랜덤
 

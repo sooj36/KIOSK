@@ -11,9 +11,10 @@ class Payment(price : Int) {
 
     var random = Random()
     // 고객번호 랜덤 생성 변수(0 ~ 1000)
-    var customerNum : Int = random.nextInt(1000)
+    var customerNum : Int = (1 until 1000).random()
     // 조리시간 랜덤 생성 변수(0 ~ 30분)
-    var cookingTime : Int = random.nextInt(30)
+    var cookingTime : Int = (5 .. 30).random()
+    //var cookingTime : Int = random.nextInt(30)
     init{
         this.price = price
     }
